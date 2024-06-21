@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.TblUsuarioImp;
+import model.TblUsuariocl2;
+
 /**
  * Servlet implementation class ControladorUsuario
  */
@@ -32,8 +35,15 @@ public class ControladorUsuario extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		TblUsuarioImp usuarioDAO = new TblUsuarioImp();
+		String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        TblUsuariocl2 usuario = usuarioDAO.validarUsuario(username, password);
+        if (usuario != null) {
+            response.sendRedirect("RegistrarProducto.jsp");
+        } else {
+            response.sendRedirect("login.jsp?error=1");
+        }
 	}
 
 }

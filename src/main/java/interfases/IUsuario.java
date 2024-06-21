@@ -1,5 +1,7 @@
 package interfases;
 
-public interface IUsuario {
+import model.TblUsuariocl2;
 
+public interface IUsuario {
+	TblUsuariocl2 validarUsuario(String username, String password);
 }
